@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { background } from "../consts/ui";
 import Header, { HeaderProps } from "./Header";
 
@@ -10,9 +10,7 @@ function Layout ({ children, title, count }: LayoutProps) {
   return (
     <SafeAreaView style={styles.appContainer}>
       <Header title={title} count={count} />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        { children }
-      </ScrollView>
+      { children }
     </SafeAreaView>
   );
 }

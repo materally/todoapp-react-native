@@ -12,3 +12,8 @@ export const button = {
   floatAddBackground: '#218BE7',
   floatRemoveBackground: '#E15356'
 }
+
+export const item = {
+  borderUnCompletedColor: '#008DC8',
+  titleColor: '#757272'
+}
