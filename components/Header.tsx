@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
-import { backgroud, text } from "../consts/ui";
+import { background, text } from "../consts/ui";
 
-interface HeaderProps {
+export interface HeaderProps {
   title: string;
   count: number;
 }
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-    backgroundColor: backgroud.counter,
+    backgroundColor: background.counter,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'

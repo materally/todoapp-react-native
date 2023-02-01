@@ -1,13 +1,15 @@
 import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
-import { backgroud } from "../consts/ui";
+import { background } from "../consts/ui";
+import Header, { HeaderProps } from "./Header";
 
-interface LayoutProps {
+interface LayoutProps extends HeaderProps {
   children: JSX.Element | Array<JSX.Element>;
 }
 
-function Layout ({ children }: LayoutProps) {
+function Layout ({ children, title, count }: LayoutProps) {
   return (
     <SafeAreaView style={styles.appContainer}>
+      <Header title={title} count={count} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         { children }
       </ScrollView>
@@ -17,7 +19,7 @@ function Layout ({ children }: LayoutProps) {
 
 const styles = StyleSheet.create({
   appContainer: {
-    backgroundColor: backgroud.base,
+    backgroundColor: background.base,
     flex: 1
   }
 });
