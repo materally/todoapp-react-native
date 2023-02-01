@@ -7,3 +7,8 @@ export const background = {
 
   counter: '#D5D8E3'
 }
+
+export const button = {
+  floatAddBackground: '#218BE7',
+  floatRemoveBackground: '#E15356'
+}

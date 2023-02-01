@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { useRoutes } from './hooks/useRoutes';
 import { background } from './consts/ui';
+import { FloatButton } from './components/FloatButton';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,6 +22,7 @@ function App(): JSX.Element {
           routes.map(({ name, component, options }) => <Tab.Screen key={name} name={name} component={component} options={options} />)
         }
       </Tab.Navigator>
+      <FloatButton />
     </NavigationContainer>
   );
 }
