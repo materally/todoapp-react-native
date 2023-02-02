@@ -1,12 +1,13 @@
 import React from 'react';
 import { FlatList } from 'react-native';
+import { observer } from 'mobx-react';
 
 import Header from '../components/Header';
 import { Item } from '../components/Item';
 import Layout from '../components/Layout';
 import todoStore from '../store/store';
 
-export function CompletedScreen(): JSX.Element {
+export const CompletedScreen = observer(() => {
   return (
     <Layout>
       <Header title='Completed' count={todoStore.completedList().count} />
@@ -18,4 +19,4 @@ export function CompletedScreen(): JSX.Element {
       />
     </Layout>
   );
-}
+})
