@@ -2,15 +2,13 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { item } from "../consts/ui";
+import { Item as ItemProps } from "../store/model";
+import { dateFormat } from "../utils/dateFormat";
 
-export interface ItemProps {
-  title: string;
-}
-
-export function Item({ title }: ItemProps): JSX.Element {
+export function Item({ title, date, onPress, onLongPress }: ItemProps): JSX.Element {
   
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress} onLongPress={onLongPress}>
       <View style={styles.innerContainer}>
 
         <View style={styles.checkboxContainer}>
@@ -22,7 +20,7 @@ export function Item({ title }: ItemProps): JSX.Element {
         </View>
 
         <View style={styles.date}>
-          <Text>01 Nov</Text>
+          <Text>{dateFormat(date)}</Text>
         </View>
 
       </View>

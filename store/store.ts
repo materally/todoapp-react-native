@@ -1,10 +1,12 @@
 import { makeAutoObservable } from "mobx";
 import { randomId } from "../utils/randomId";
 import { initTodos } from "./mock";
-import { Items } from "./model";
+import { Item, Items } from "./model";
 
 class TodoStore {
   list: Items = [];
+  showModal: boolean = false;
+  editItem: Item | undefined = undefined;
 
   constructor(){
     makeAutoObservable(this);
@@ -12,12 +14,19 @@ class TodoStore {
     this.list = initTodos;
   }
 
-  create = (value: string) => {
+  create = (title: string, desc: string, date: Date) => {
     this.list.push({
       id: randomId(),
-      title: value,
+      title,
+      desc,
+      date,
       done: false
     })
+  }
+
+  edit = (item: Item) => {
+    const index = this.list.findIndex(editItem => editItem.id === item.id);
+    this.list[index] = item;
   }
 
   completedList = () => {
@@ -37,6 +46,10 @@ class TodoStore {
       count: list.length
     };
   }
+
+  setShowModal = () => this.showModal = !this.showModal
+  
+  setEditItem = (item: Item | undefined) => this.editItem = item;
 }
 
 const todoStore = new TodoStore();

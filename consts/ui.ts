@@ -1,5 +1,6 @@
 export const text = {
-  base: '#404040'
+  base: '#404040',
+  inputPlaceholder: '#B2B2B2'
 }
 
 export const background = {
@@ -9,7 +10,7 @@ export const background = {
 }
 
 export const button = {
-  floatAddBackground: '#218BE7',
+  actionBackground: '#218BE7',
   floatRemoveBackground: '#E15356'
 }
 

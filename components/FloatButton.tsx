@@ -1,17 +1,19 @@
+import { observer } from "mobx-react";
 import { StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { button } from "../consts/ui";
+import todoStore from "../store/store";
 
 const screenWidth = Dimensions.get('window').width;
 
-export function FloatButton () {
+export const FloatButton = observer(() => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={ () => todoStore.setShowModal() }>
       <Ionicons name='add' size={24} color='white' />
     </TouchableOpacity>
   );
-}
+})
 
 const styles = StyleSheet.create({
   container: {
@@ -21,7 +23,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: button.floatAddBackground,
+    backgroundColor: button.actionBackground,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
