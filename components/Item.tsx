@@ -5,18 +5,18 @@ import { item } from "../consts/ui";
 import { Item as ItemProps } from "../store/model";
 import { dateFormat } from "../utils/dateFormat";
 
-export function Item({ title, date, onPress, onLongPress }: ItemProps): JSX.Element {
+export function Item({ title, date, onPress, onLongPress, done }: ItemProps): JSX.Element {
   
   return (
     <TouchableOpacity style={styles.container} onPress={onPress} onLongPress={onLongPress}>
-      <View style={styles.innerContainer}>
+      <View style={{ ...styles.innerContainer, borderRightColor: done ? item.borderCompletedColor : item.borderUnCompletedColor }}>
 
         <View style={styles.checkboxContainer}>
-          <Ionicons name='ios-square-outline' size={24} />
+          <Ionicons name={done ? 'ios-checkbox' : 'ios-square-outline'} size={24} />
         </View>
 
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{ title }</Text>
+          <Text style={{ ...styles.title, textDecorationLine: done ?'line-through' : 'none' }}>{ title }</Text>
         </View>
 
         <View style={styles.date}>
@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
 
   innerContainer: {
     borderRightWidth: 2,
-    borderRightColor: item.borderUnCompletedColor,
     borderStyle: 'solid',
     display: 'flex',
     justifyContent: 'space-between',
