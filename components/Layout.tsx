@@ -1,15 +1,13 @@
 import { SafeAreaView, StyleSheet } from "react-native";
 import { background } from "../consts/ui";
-import Header, { HeaderProps } from "./Header";
 
-interface LayoutProps extends HeaderProps {
+interface LayoutProps {
   children: JSX.Element | Array<JSX.Element>;
 }
 
-function Layout ({ children, title, count }: LayoutProps) {
+function Layout ({ children }: LayoutProps) {
   return (
     <SafeAreaView style={styles.appContainer}>
-      <Header title={title} count={count} />
       { children }
     </SafeAreaView>
   );
