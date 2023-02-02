@@ -15,6 +15,7 @@ export const button = {
 }
 
 export const item = {
+  borderCompletedColor: '#E15356',
   borderUnCompletedColor: '#008DC8',
   titleColor: '#757272'
 }
