@@ -14,7 +14,7 @@ export const CompletedScreen = observer(() => {
       <FlatList
         contentContainerStyle={{ alignItems: 'center', paddingTop: 10 }}
         data={todoStore.completedList().list}
-        renderItem={({ item }) => <Item title={item.title} />}
+        renderItem={({ item: { id, title, date, done } }) => <Item id={id} title={title} date={date} done={done} />}
         keyExtractor={item => item.id}
       />
     </Layout>

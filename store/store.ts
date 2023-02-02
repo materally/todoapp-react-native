@@ -5,6 +5,7 @@ import { Items } from "./model";
 
 class TodoStore {
   list: Items = [];
+  showModal: boolean = false;
 
   constructor(){
     makeAutoObservable(this);
@@ -12,10 +13,12 @@ class TodoStore {
     this.list = initTodos;
   }
 
-  create = (value: string) => {
+  create = (title: string, desc: string, date: Date) => {
     this.list.push({
       id: randomId(),
-      title: value,
+      title,
+      desc,
+      date,
       done: false
     })
   }
@@ -36,6 +39,10 @@ class TodoStore {
       list,
       count: list.length
     };
+  }
+
+  setShowModal = () => {
+    return this.showModal = !this.showModal
   }
 }
 

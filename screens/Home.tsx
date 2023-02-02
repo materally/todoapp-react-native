@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import { Item } from '../components/Item';
 import Layout from '../components/Layout';
 import todoStore from '../store/store';
+import { AddEditTodo } from '../components/AddEditTodo';
 
 export const HomeScreen = observer(() => {
   return (
@@ -14,9 +15,10 @@ export const HomeScreen = observer(() => {
       <FlatList
         contentContainerStyle={{ alignItems: 'center', paddingTop: 10 }}
         data={todoStore.unCompletedList().list}
-        renderItem={({ item }) => <Item title={item.title} />}
+        renderItem={({ item: { id, title, date, done } }) => <Item id={id} title={title} date={date} done={done} />}
         keyExtractor={item => item.id}
       />
+      <AddEditTodo />
     </Layout>
   );
 })
