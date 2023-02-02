@@ -1,21 +1,33 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+
 import { background, text } from "../consts/ui";
 
 export interface HeaderProps {
   title: string;
-  count: number;
+  count?: number;
+  onClose?: () => void;
 }
 
-function Header({ title, count }: HeaderProps): JSX.Element {
-  
+function Header({ title, count, onClose }: HeaderProps): JSX.Element {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
+        {
+          onClose && (
+            <TouchableOpacity style={styles.closeContainer} onPress={onClose}>
+              <Ionicons name="close" size={32} />
+            </TouchableOpacity>
+          )
+        }
         <Text style={styles.title}>{ title }</Text>
-
-        <View style={styles.countContainer}>
-          <Text>{ count }</Text>
-        </View>
+        {
+          count && (
+            <View style={styles.countContainer}>
+              <Text>{ count }</Text>
+            </View>
+          )
+        }
       </View>
     </View>
   );
@@ -48,7 +60,16 @@ const styles = StyleSheet.create({
   },
   countText: {
     color: text.base
-  }
+  },
+  closeContainer: {
+    left: -110,
+    position: 'absolute',
+    width: 30,
+    height: 30,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 });
 
 export default Header;
