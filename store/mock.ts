@@ -1,7 +1,7 @@
 import { randomId } from '../utils/randomId';
 import { Items } from './model';
 
-export const initTodos: Items = [
+export const initItems: Items = [
   {
     id: randomId(),
     title: 'First Item #1',

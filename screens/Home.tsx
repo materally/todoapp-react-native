@@ -30,10 +30,10 @@ export const HomeScreen = observer(() => {
 
   return (
     <Layout>
-      <Header title='My Task' count={todoStore.unCompletedList().count} />
+      <Header title='My Task' count={todoStore.unCompletedItems().count} />
       <FlatList
         contentContainerStyle={{ alignItems: 'center', paddingTop: 10 }}
-        data={todoStore.unCompletedList().list}
+        data={todoStore.unCompletedItems().items}
         renderItem={({ item }) => <Item id={item.id} title={item.title} date={item.date} done={item.done} onLongPress={() => editItem(item)} onPress={() => doneTodo(item.id)} />}
         keyExtractor={item => item.id}
         ListEmptyComponent={<Text>There are no tasks!</Text>}

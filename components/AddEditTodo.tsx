@@ -10,7 +10,7 @@ import Layout from "./Layout";
 import { button, text } from "../consts/ui";
 
 export const AddEditTodo = observer(() => {
-  const store = todoStore?.editItem;
+  const storeEdit = todoStore?.editItem;
   const [id, setId] = useState<string | null>(null);
   const [title, setTitle] = useState<string>('');
   const [desc, setDesc] = useState<string>('');
@@ -28,7 +28,9 @@ export const AddEditTodo = observer(() => {
 
   const addTodo = () => {
     if(title === "") return;
+
     todoStore.create(title, desc, date);
+
     onClose();
   }
 
@@ -36,7 +38,7 @@ export const AddEditTodo = observer(() => {
     if(title === "") return;
     if(!id) return;
 
-    todoStore.edit({
+    todoStore.update({
       id,
       title,
       desc,
@@ -48,15 +50,15 @@ export const AddEditTodo = observer(() => {
   }
 
   useEffect(() => {
-    if(store){
-      const { id, title, desc, date } = store;
+    if(storeEdit){
+      const { id, title, desc, date } = storeEdit;
 
       setId(id);
       setTitle(title);
       setDesc(desc || '');
       setDate(date);
     }
-  }, [store])
+  }, [storeEdit])
 
   return (
     <Modal

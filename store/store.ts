@@ -1,21 +1,21 @@
 import { makeAutoObservable } from "mobx";
 import { randomId } from "../utils/randomId";
-import { initTodos } from "./mock";
+import { initItems } from "./mock";
 import { Item, Items } from "./model";
 
 class TodoStore {
-  list: Items = [];
+  items: Items = [];
   showModal: boolean = false;
   editItem: Item | undefined = undefined;
 
   constructor(){
     makeAutoObservable(this);
     
-    this.list = initTodos;
+    this.items = initItems;
   }
 
   create = (title: string, desc: string, date: Date) => {
-    this.list.push({
+    this.items.push({
       id: randomId(),
       title,
       desc,
@@ -24,26 +24,26 @@ class TodoStore {
     })
   }
 
-  edit = (item: Item) => {
-    const index = this.list.findIndex(editItem => editItem.id === item.id);
-    this.list[index] = item;
+  update = (item: Item) => {
+    const index = this.items.findIndex(editItem => editItem.id === item.id);
+    this.items[index] = item;
   }
 
-  completedList = () => {
-    const list = this.list.filter(item => item.done)
+  completedItems = () => {
+    const items = this.items.filter(item => item.done)
 
     return {
-      list,
-      count: list.length
+      items,
+      count: items.length
     }
   }
 
-  unCompletedList = () => {
-    const list = this.list.filter(item => !item.done)
+  unCompletedItems = () => {
+    const items = this.items.filter(item => !item.done)
 
     return {
-      list,
-      count: list.length
+      items,
+      count: items.length
     };
   }
 
@@ -52,8 +52,8 @@ class TodoStore {
   setEditItem = (item: Item | undefined) => this.editItem = item;
 
   setItemStatus = (id: string) => {
-    const index = this.list.findIndex(item => item.id === id);
-    this.list[index].done = !this.list[index].done;
+    const index = this.items.findIndex(item => item.id === id);
+    this.items[index].done = !this.items[index].done;
   }
 }
 

@@ -23,10 +23,10 @@ export const CompletedScreen = observer(() => {
 
   return (
     <Layout>
-      <Header title='Completed' count={todoStore.completedList().count} />
+      <Header title='Completed' count={todoStore.completedItems().count} />
       <FlatList
         contentContainerStyle={{ alignItems: 'center', paddingTop: 10 }}
-        data={todoStore.completedList().list}
+        data={todoStore.completedItems().items}
         renderItem={({ item: { id, title, date, done } }) => <Item id={id} title={title} date={date} done={done} onPress={() => undoTodo(id)} />}
         keyExtractor={item => item.id}
         ListEmptyComponent={<Text>There are no tasks!</Text>}
