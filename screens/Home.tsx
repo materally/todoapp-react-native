@@ -17,7 +17,6 @@ export const HomeScreen = observer(() => {
   }
 
   const doneTodo = (id: string) => {
-
     Alert.alert('Biztosan?', 'Biztosan elvégzed a feladatot?', [
       {
         text: 'Nem',

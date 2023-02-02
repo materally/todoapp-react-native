@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Text } from 'react-native';
+import { Alert, FlatList, Text } from 'react-native';
 import { observer } from 'mobx-react';
 
 import Header from '../components/Header';
@@ -8,13 +8,26 @@ import Layout from '../components/Layout';
 import todoStore from '../store/store';
 
 export const CompletedScreen = observer(() => {
+  
+  const undoTodo = (id: string) => {
+    Alert.alert('Biztosan?', 'Biztosan visszavonod a feladatot?', [
+      {
+        text: 'Nem',
+        style: 'cancel',
+      },
+      {
+        text: 'Igen', onPress: () => todoStore.setItemStatus(id)
+      },
+    ]);
+  }
+
   return (
     <Layout>
       <Header title='Completed' count={todoStore.completedList().count} />
       <FlatList
         contentContainerStyle={{ alignItems: 'center', paddingTop: 10 }}
         data={todoStore.completedList().list}
-        renderItem={({ item: { id, title, date, done } }) => <Item id={id} title={title} date={date} done={done} />}
+        renderItem={({ item: { id, title, date, done } }) => <Item id={id} title={title} date={date} done={done} onPress={() => undoTodo(id)} />}
         keyExtractor={item => item.id}
         ListEmptyComponent={<Text>There are no tasks!</Text>}
       />
