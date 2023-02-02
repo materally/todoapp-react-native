@@ -10,6 +10,8 @@ export interface HeaderProps {
 }
 
 function Header({ title, count, onClose }: HeaderProps): JSX.Element {
+  const showCount = typeof count === "number";
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -22,11 +24,11 @@ function Header({ title, count, onClose }: HeaderProps): JSX.Element {
         }
         <Text style={styles.title}>{ title }</Text>
         {
-          count && (
+          showCount ? (
             <View style={styles.countContainer}>
               <Text>{ count }</Text>
             </View>
-          )
+          ) : null
         }
       </View>
     </View>

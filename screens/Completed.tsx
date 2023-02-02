@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Text } from 'react-native';
 import { observer } from 'mobx-react';
 
 import Header from '../components/Header';
@@ -16,6 +16,7 @@ export const CompletedScreen = observer(() => {
         data={todoStore.completedList().list}
         renderItem={({ item: { id, title, date, done } }) => <Item id={id} title={title} date={date} done={done} />}
         keyExtractor={item => item.id}
+        ListEmptyComponent={<Text>There are no tasks!</Text>}
       />
     </Layout>
   );

@@ -50,6 +50,11 @@ class TodoStore {
   setShowModal = () => this.showModal = !this.showModal
   
   setEditItem = (item: Item | undefined) => this.editItem = item;
+
+  setItemStatus = (id: string) => {
+    const index = this.list.findIndex(item => item.id === id);
+    this.list[index].done = !this.list[index].done;
+  }
 }
 
 const todoStore = new TodoStore();
