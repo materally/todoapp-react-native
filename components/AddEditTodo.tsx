@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View, Modal, Text, TextInput, TouchableOpacity } from "react-native";
 import { observer } from "mobx-react";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -10,30 +10,61 @@ import Layout from "./Layout";
 import { button, text } from "../consts/ui";
 
 export const AddEditTodo = observer(() => {
+  const store = todoStore?.editItem;
+  const [id, setId] = useState<string | null>(null);
   const [title, setTitle] = useState<string>('');
   const [desc, setDesc] = useState<string>('');
   const [date, setDate] = useState<Date>(new Date());
   const [openDatePicker, setOpenDatePicker] = useState(false);
 
-  const addTodo = () => {
-    if(title === "") return;
-
-    todoStore.create(title, desc, date);
-
-    todoStore.setShowModal();
-
+  const onClose = () => {
+    setId(null);
     setTitle('');
     setDesc('');
     setDate(new Date());
+    todoStore.setShowModal()
+    todoStore.setEditItem(undefined);
   }
-  
+
+  const addTodo = () => {
+    if(title === "") return;
+    todoStore.create(title, desc, date);
+    onClose();
+  }
+
+  const editTodo = () => {
+    if(title === "") return;
+    if(!id) return;
+
+    todoStore.edit({
+      id,
+      title,
+      desc,
+      date,
+      done: false
+    });
+
+    onClose();
+  }
+
+  useEffect(() => {
+    if(store){
+      const { id, title, desc, date } = store;
+
+      setId(id);
+      setTitle(title);
+      setDesc(desc || '');
+      setDate(date);
+    }
+  }, [store])
+
   return (
     <Modal
       animationType="slide"
       transparent={false}
       visible={todoStore.showModal}>
       <Layout>
-        <Header title="Add New Task" onClose={() => todoStore.setShowModal()} />
+        <Header title={id ? "Edit Task" : "Add New Task"} onClose={onClose} />
 
         <TextInput
           placeholder="My Task"
@@ -68,8 +99,8 @@ export const AddEditTodo = observer(() => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.buttonContainer} onPress={addTodo}>
-          <Text style={styles.buttonText}>ADD TASK</Text>
+        <TouchableOpacity style={styles.buttonContainer} onPress={id ? editTodo : addTodo}>
+          <Text style={styles.buttonText}>{ id ? "EDIT TASK" : "ADD TASK"}</Text>
         </TouchableOpacity>
 
       </Layout>

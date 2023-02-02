@@ -5,10 +5,10 @@ import { item } from "../consts/ui";
 import { Item as ItemProps } from "../store/model";
 import { dateFormat } from "../utils/dateFormat";
 
-export function Item({ title, date }: ItemProps): JSX.Element {
+export function Item({ title, date, onPress, onLongPress }: ItemProps): JSX.Element {
   
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress} onLongPress={onLongPress}>
       <View style={styles.innerContainer}>
 
         <View style={styles.checkboxContainer}>

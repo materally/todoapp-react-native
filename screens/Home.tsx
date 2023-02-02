@@ -7,15 +7,22 @@ import { Item } from '../components/Item';
 import Layout from '../components/Layout';
 import todoStore from '../store/store';
 import { AddEditTodo } from '../components/AddEditTodo';
+import { Item as ItemProps} from '../store/model';
 
 export const HomeScreen = observer(() => {
+
+  const editItem = (item: ItemProps) => {
+    todoStore.setEditItem(item);
+    todoStore.setShowModal();
+  }
+
   return (
     <Layout>
-      <Header title='My task' count={todoStore.unCompletedList().count} />
+      <Header title='My Task' count={todoStore.unCompletedList().count} />
       <FlatList
         contentContainerStyle={{ alignItems: 'center', paddingTop: 10 }}
         data={todoStore.unCompletedList().list}
-        renderItem={({ item: { id, title, date, done } }) => <Item id={id} title={title} date={date} done={done} />}
+        renderItem={({ item }) => <Item id={item.id} title={item.title} date={item.date} done={item.done} onLongPress={() => editItem(item)} />}
         keyExtractor={item => item.id}
       />
       <AddEditTodo />
