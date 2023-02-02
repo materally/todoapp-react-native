@@ -17,14 +17,23 @@ class TodoStore {
     })
   }
 
-  countCompleted = () => {
-    return this.list.filter(item => item.done).length;
+  completedList = () => {
+    const list = this.list.filter(item => item.done)
+
+    return {
+      list,
+      count: list.length
+    }
   }
 
-  countUnCompleted = () => {
-    return this.list.filter(item => !item.done).length;
-  }
+  unCompletedList = () => {
+    const list = this.list.filter(item => !item.done)
 
+    return {
+      list,
+      count: list.length
+    };
+  }
 }
 
 const todoStore = new TodoStore();
