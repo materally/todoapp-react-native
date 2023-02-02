@@ -1,30 +1,16 @@
 import React from 'react';
 import { FlatList } from 'react-native';
+
 import { Item } from '../components/Item';
-
 import Layout from '../components/Layout';
-
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-];
+import todoStore from '../store/store';
 
 export function HomeScreen(): JSX.Element {
   return (
     <Layout title='My task' count={0}>
       <FlatList
         contentContainerStyle={{ alignItems: 'center', paddingTop: 10 }}
-        data={DATA}
+        data={todoStore.list}
         renderItem={({ item }) => <Item title={item.title} />}
         keyExtractor={item => item.id}
       />
